@@ -1,0 +1,17 @@
+.navigationMenu {
+  display: inline-block;
+}
+.iAmHere {
+  background-color: #D9D8A3;
+  font-weight: bold;
+}
+.logo {
+  
+}
+body {
+  background-color: #F0E2C1;
+}
+a {
+  text-decoration: none;
+  color: #5C6149;
+}
