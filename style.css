@@ -1,12 +1,32 @@
 .navigationMenu {
   display: inline-block;
+
 }
 .iAmHere {
   background-color: #D9D8A3;
   font-weight: bold;
 }
+.businessName {
+  text-align: center;
+  margin: 125px auto 0;
+}
 .logo {
-  
+  background-image: url("assets/salmon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 250px;
+  border: 2px solid #5C6149;
+}
+.hoursOfOper {
+  margin-right: 10px;
+  display: inline-block;
+  float: right;
+}
+.clearFix {
+  float: none;
+}
+ul {
+  list-style-type: none;
 }
 body {
   background-color: #F0E2C1;
