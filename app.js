@@ -107,19 +107,8 @@ var createStoreTable = function() {
 };
 createStoreTable();
 
-var firstAndPike = new CookieStore('1st and Pike', 23, 65, 6.3);
-firstAndPike.renderSales();
-var seatac = new CookieStore('SeaTac Airport', 3, 24, 1.2);
-seatac.renderSales();
-var seattleCent = new CookieStore('Seattle Center', 11, 38, 3.7);
-seattleCent.renderSales();
-var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
-capHill.renderSales();
-var alki = new CookieStore('Alki', 2, 16, 4.6);
-alki.renderSales();
-
 // create total cookie row
-var createTotalRow = function() {
+function createTotalRow() {
   var table = document.getElementById('store-data');
   var tr = document.createElement('tr');
   var tBody = document.getElementById('store-body');
@@ -138,9 +127,23 @@ var createTotalRow = function() {
     tr.appendChild(td);
   }
 };
-createTotalRow();
 
-var newStoreArray = [];
+var firstAndPike = new CookieStore('1st and Pike', 23, 65, 6.3);
+var seatac = new CookieStore('SeaTac Airport', 3, 24, 1.2);
+var seattleCent = new CookieStore('Seattle Center', 11, 38, 3.7);
+var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
+var alki = new CookieStore('Alki', 2, 16, 4.6);
+
+function populateTable(){
+  console.log('populateTable');
+  var tBody = document.getElementById('store-body');
+  tBody.innerHTML = '';
+  for(var i = 0; i < locations.length; i++){
+    locations[i].renderSales();
+  }
+  createTotalRow();
+}
+populateTable();
 
 //get our 'submit' and assign.
 //assign user input to separate variables
@@ -154,26 +157,9 @@ function postForm(event) {
   var minHourly = parseInt(event.target[2].value);
   var maxHourly = parseInt(event.target[3].value);
   var avgSale = parseFloat(event.target[4].value);
-  newStoreArray.push(location, minHourly, maxHourly, avgSale);
-  console.log(event);
   var newStore = new CookieStore(location, minHourly, maxHourly, avgSale);
-  for(var i = 0; i < locations.length; i++){
-    
-  }
+  newStore.renderSales();
+  populateTable();
 };
 
 submitForm.addEventListener('submit', postForm);
-
-// getting our button and creating a store
-
-//trying to set each value in the array as an argument when passing our
-//new store
-// var btn = document.getElementById('new-store');
-// function makeNewStore(event){
-//   if (newStoreArray.length !== 0) {
-//
-//     console.log('My new store is ' + newStore);
-//   }
-// }
-//
-// btn.addEventListener('click', makeNewStore);
