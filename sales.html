@@ -22,7 +22,20 @@
           </ul>
       </nav>
     </header>
-    <main id = 'main'>
+    <main id="content">
+      <section id="formSection">
+        <form id="newStoreForm" action="" method="post">
+          <fieldset><legend>New Store Form</legend>
+          <input type="text" id="location" name="location" value="" placeholder="New Store Location"/>
+          <input type="number" id="minHourly" name="minHourly" value="" placeholder="Minimum customer value"/>
+          <input type="number" id="maxHourly" name="maxHourly" value="" placeholder="Maximum customer value"/>
+          <input type="number" id="avgSale" name="avgSale" value="" placeholder="Average Sale per customer"/>
+          <input type="submit" id="submitNewStore" value="Add New Store"/>
+          </fieldset>
+        </form>
+
+
+      </section>
 
     </main>
     <script src="app.js"></script>

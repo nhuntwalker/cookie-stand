@@ -28,8 +28,8 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.attachStoreName = function () {
     var h2 = document.createElement('h2');
     h2.innerText = (this.location);
-    var main = document.getElementsByTagName('main')[0];
-    main.appendChild(h2);
+    var content = document.getElementById('content');
+    content.appendChild(h2);
   };
   //function to generate the amount of cookies per hour
   this.createStoreInfo = function () {
@@ -39,8 +39,8 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
       li.innerText = hours[i] + ': ' + this.totalDailySales[i] + ' cookies';
       ul.appendChild(li);
     }
-    var main = document.getElementsByTagName('main')[0];
-    main.appendChild(ul);
+    var content = document.getElementById('content');
+    content.appendChild(ul);
   };
   // create a row of data for each store
   this.createTableRow = function() {
@@ -71,16 +71,16 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
 };
 var h1 = document.createElement ('h1');
 h1.innerText = 'All Cookies Stores';
-var main = document.getElementsByTagName('main')[0];
-main.appendChild(h1);
+var content = document.getElementById('content');
+content.appendChild(h1);
 //create table
 var createStoreTable = function() {
-  var main = document.getElementsByTagName('main')[0];
+  var content = document.getElementById('content');
   var table = document.createElement('table');
   //give table an id
   table.id = 'store-data';
   //append the table to the DOM
-  main.appendChild(table);
+  content.appendChild(table);
   //create a <thead> to the table
   var tHead = document.createElement('thead');
   //append <thead> to the table
@@ -127,10 +127,10 @@ var createTotalRow = function() {
   var th = document.createElement('th');
   th.innerText = 'Total: ';
   tr.appendChild(th);
-  for (var i = 0; i < hours.length; i++) {
+  for (var i = 1; i < hours.length; i++) {
     var hourlySales = 0;
     var hourlyStoreTotal = 0;
-    for (var j = 0; j < locations.length; j++) {
+    for (var j = 1; j < locations.length; j++) {
       hourlySales += locations[j].totalDailySales[i];
     }
     var td = document.createElement('td');
@@ -139,3 +139,16 @@ var createTotalRow = function() {
   }
 };
 createTotalRow();
+
+var newStoreArray = [];
+
+var submitForm = document.getElementById('newStoreForm');
+function postForm(event) {
+  event.preventDefault();
+  var location = event.target[1].value;
+  var minHourly = event.target[2].value;
+  var maxHourly = event.target[3].value;
+  var avgSale = event.target[4].value;
+  newStoreArray.push(location, minHourly, maxHourly, avgSale);
+  console.log(event);
+};
