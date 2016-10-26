@@ -19,7 +19,8 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
   // calculate cookie sales
   this.calcCookieSales = function() {
     for (var i = 0; i < hours.length; i++) {
-      this.totalDailySales.push(Math.floor(this.randomNumCust() * this.avgSale));
+      this.totalDailySales[i] = Math.floor(this.randomNumCust() * this.avgSale);
+      this.storeTotals += this.totalDailySales[i];
     }
   };
   // attach store name to a h2 header
@@ -79,6 +80,10 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
     this.createTableRow();
   };
 };
+var h1 = document.createElement ('h1');
+h1.innerText = 'All Cookies Stores';
+var main = document.getElementsByTagName('main')[0];
+main.appendChild(h1);
 //create table
 var createStoreTable = function() {
   var main = document.getElementsByTagName('main')[0];
@@ -136,8 +141,8 @@ var createTotalRow = function() {
   for (var i = 0; i < hours.length; i++) {
     var hourlySales = 0;
     var hourlyStoreTotal = 0;
-    for (var j = 0; j < locationArray.length; j++) {
-      hourlySales += locationArray[j].totalDailySales[i];
+    for (var j = 0; j < locations.length; j++) {
+      hourlySales += locations[j].totalDailySales[i];
     }
     var td = document.createElement('td');
     td.innerText = hourlySales;
@@ -145,8 +150,3 @@ var createTotalRow = function() {
   }
 };
 createTotalRow();
-
-var h1 = document.createElement ('h1');
-h1.innerText = 'All Cookies Stores';
-var main = document.getElementsByTagName('main')[0];
-main.appendChild(h1);
