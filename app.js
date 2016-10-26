@@ -12,9 +12,10 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.totalDailySales = [];
   this.storeTotals = 0;
   locations.push(this);
+
   // random customer amount
   this.randomNumCust = function () {
-    return Math.floor(Math.random() * (this.maxHourly - this.minHourly) + this.minCust);
+    return Math.floor(Math.random() * (this.maxHourly - this.minHourly) + this.minHourly);
   };
   // calculate cookie sales
   this.calcCookieSales = function() {
@@ -61,18 +62,6 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
     tr.appendChild(locationCell);
   };
   // function for total cookies in a day
-  this.totalCookies = function() {
-    var tr = document.createElement('tr');
-    var tBody = document.getElementById('store-body');
-    tBody.appendChild(tr);
-    var totalSales = 0;
-    for (var i = 0; i < this.totalDailySales.length; i++) {
-      this.totalSales += this.totalDailySales[i];
-      var td = document.createElement('td');
-      td.innerText = this.totalSales;
-      tr.appendChild(td);
-    }
-  };
   // function to render data to page
   this.renderSales = function() {
     // Calculate all the cookie sales
@@ -112,9 +101,9 @@ var createStoreTable = function() {
     th.innerText = hours[i];
     tr.appendChild(th);
   }
-  var th2 = document.createElement('th');
-  th2.innerText = 'Store Totals: ';
-  tr.appendChild(th2);
+  var th = document.createElement('th');
+  th.innerText = 'Store Totals: ';
+  tr.appendChild(th);
 };
 createStoreTable();
 
