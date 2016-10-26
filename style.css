@@ -25,6 +25,9 @@
 .clearFix {
   float: none;
 }
+#store-data {
+  margin: 0 auto;
+}
 ul {
   list-style-type: none;
 }
@@ -34,4 +37,20 @@ body {
 a {
   text-decoration: none;
   color: #5C6149;
+}
+table {
+  border: 2px solid black;
+  height: 200px;
+  margin: 0 auto;
+}
+th, tr {
+  border: 1px solid black;
+  text-align: center;
+
+}
+td {
+  border: 1px solid black;
+  text-align: center;
+  width: 40px;
+  height: 30px;
 }
