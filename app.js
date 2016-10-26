@@ -1,8 +1,6 @@
 'use strict';
-
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var locations = [];
-
 function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.location = location;
   this.minHourly = minHourly;
@@ -11,8 +9,6 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.hourlySales = [];
   this.totalDailySales = [];
   this.storeTotals = 0;
-  locations.push(this);
-
   // random customer amount
   this.randomNumCust = function () {
     return Math.floor(Math.random() * (this.maxHourly - this.minHourly) + this.minHourly);
@@ -68,6 +64,7 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
     this.calcCookieSales();
     this.createTableRow();
   };
+  locations.push(this);
 };
 var h1 = document.createElement ('h1');
 h1.innerText = 'All Cookies Stores';
@@ -85,11 +82,9 @@ var createStoreTable = function() {
   var tHead = document.createElement('thead');
   //append <thead> to the table
   table.appendChild(tHead);
-
   var tBody = document.createElement('tbody');
   tBody.id = 'store-body';
   table.appendChild(tBody);
-
   var tr = document.createElement('tr');
   tHead.appendChild(tr);
    //create & append a <th> for ever hour
@@ -106,7 +101,6 @@ var createStoreTable = function() {
   tr.appendChild(th);
 };
 createStoreTable();
-
 var firstAndPike = new CookieStore('1st and Pike', 23, 65, 6.3);
 firstAndPike.renderSales();
 var seatac = new CookieStore('SeaTac Airport', 3, 24, 1.2);
@@ -117,7 +111,6 @@ var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
 capHill.renderSales();
 var alki = new CookieStore('Alki', 2, 16, 4.6);
 alki.renderSales();
-
 // create total cookie row
 var createTotalRow = function() {
   var table = document.getElementById('store-data');
@@ -139,16 +132,35 @@ var createTotalRow = function() {
   }
 };
 createTotalRow();
-
 var newStoreArray = [];
-
+//get our 'submit' and assign.
+//assign user input to separate variables
+//push our data to an Array,
+//use that array to create a store by passing it as a new Store.
 var submitForm = document.getElementById('newStoreForm');
 function postForm(event) {
   event.preventDefault();
   var location = event.target[1].value;
-  var minHourly = event.target[2].value;
-  var maxHourly = event.target[3].value;
-  var avgSale = event.target[4].value;
+  var minHourly = parseInt(event.target[2].value);
+  var maxHourly = parseInt(event.target[3].value);
+  var avgSale = parseFloat(event.target[4].value);
   newStoreArray.push(location, minHourly, maxHourly, avgSale);
   console.log(event);
+  var newStore = new CookieStore(location, minHourly, maxHourly, avgSale);
+  for(var i = 0; i < locations.length; i++){
+
+  }
 };
+submitForm.addEventListener('submit', postForm);
+// getting our button and creating a store
+//trying to set each value in the array as an argument when passing our
+//new store
+// var btn = document.getElementById('new-store');
+// function makeNewStore(event){
+//   if (newStoreArray.length !== 0) {
+//
+//     console.log('My new store is ' + newStore);
+//   }
+// }
+//
+// btn.addEventListener('click', makeNewStore);
