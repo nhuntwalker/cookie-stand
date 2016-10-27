@@ -9,6 +9,7 @@ function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.hourlySales = [];
   this.totalDailySales = [];
   this.storeTotals = 0;
+
   // random customer amount
   this.randomNumCust = function () {
     return Math.floor(Math.random() * (this.maxHourly - this.minHourly) + this.minHourly);
@@ -101,6 +102,7 @@ var createStoreTable = function() {
   tr.appendChild(th);
 };
 createStoreTable();
+
 // create total cookie row
 function createTotalRow() {
   var table = document.getElementById('store-data');
@@ -121,11 +123,13 @@ function createTotalRow() {
     tr.appendChild(td);
   }
 };
+
 var firstAndPike = new CookieStore('1st and Pike', 23, 65, 6.3);
 var seatac = new CookieStore('SeaTac Airport', 3, 24, 1.2);
 var seattleCent = new CookieStore('Seattle Center', 11, 38, 3.7);
 var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
 var alki = new CookieStore('Alki', 2, 16, 4.6);
+
 function populateTable(){
   console.log('populateTable');
   var tBody = document.getElementById('store-body');
@@ -136,10 +140,12 @@ function populateTable(){
   createTotalRow();
 }
 populateTable();
+
 //get our 'submit' and assign.
 //assign user input to separate variables
 //push our data to an Array,
 //use that array to create a store by passing it as a new Store.
+
 var submitForm = document.getElementById('newStoreForm');
 function postForm(event) {
   event.preventDefault();
@@ -151,4 +157,5 @@ function postForm(event) {
   newStore.renderSales();
   populateTable();
 };
+
 submitForm.addEventListener('submit', postForm);
