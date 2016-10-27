@@ -1,6 +1,13 @@
 'use strict';
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var locations = [];
+
+var makeNewElement = function(elementTag, elementContent, target){
+  var newEl = document.createElement(elementTag);
+  newEl.innerText = elementContent;
+  target.appendChild(newEl);
+};
+
 function CookieStore (location, minHourly, maxHourly, avgSale) {
   this.location = location;
   this.minHourly = minHourly;
@@ -72,17 +79,11 @@ var createStoreTable = function() {
   var tr = document.createElement('tr');
   tHead.appendChild(tr);
    //create & append a <th> for ever hour
-  var th = document.createElement('th');
-  th.innerText = ' ';
-  tr.appendChild(th);
+  makeNewElement('th', ' ', tr);
   for (var i = 0; i < hours.length; i++) {
-    var th = document.createElement('th');
-    th.innerText = hours[i];
-    tr.appendChild(th);
+    makeNewElement('th', hours[i], tr);
   }
-  var th = document.createElement('th');
-  th.innerText = 'Store Totals: ';
-  tr.appendChild(th);
+  makeNewElement('th', 'Store Totals', tr);
 };
 createStoreTable();
 
@@ -95,16 +96,20 @@ function createTotalRow() {
   var th = document.createElement('th');
   th.innerText = 'Total: ';
   tr.appendChild(th);
+  var allTotal = 0;
   for (var i = 0; i < hours.length; i++) {
     var hourlySales = 0;
-    var hourlyStoreTotal = 0;
     for (var j = 0; j < locations.length; j++) {
       hourlySales += locations[j].totalDailySales[i];
     }
     var td = document.createElement('td');
     td.innerText = hourlySales;
+    allTotal += hourlySales;
     tr.appendChild(td);
   }
+  var td = document.createElement('td');
+  td.innerText = allTotal;
+  tr.appendChild(td);
 };
 
 var firstAndPike = new CookieStore('1st and Pike', 23, 65, 6.3);
@@ -132,10 +137,11 @@ populateTable();
 var submitForm = document.getElementById('newStoreForm');
 function postForm(event) {
   event.preventDefault();
-  var location = event.target[1].value;
-  var minHourly = parseInt(event.target[2].value);
-  var maxHourly = parseInt(event.target[3].value);
-  var avgSale = parseFloat(event.target[4].value);
+  console.log(event);
+  var location = this[1].value;
+  var minHourly = parseInt(this[2].value);
+  var maxHourly = parseInt(this[3].value);
+  var avgSale = parseFloat(this[4].value);
   var newStore = new CookieStore(location, minHourly, maxHourly, avgSale);
   newStore.renderSales();
   populateTable();
